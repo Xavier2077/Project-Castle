@@ -1,0 +1,104 @@
+#定义一个学生类储存信息
+class student():
+    num=2022
+    name=" "
+    age=18
+    grade_chinese=0
+    grade_math=0
+    grade_english=0
+
+def print_s(tmp):
+    print("学号:",tmp.num,"姓名",tmp.name,"年龄:",tmp.age,"三科成绩:",tmp.grade_chinese,tmp.grade_math,tmp.grade_english)
+
+def menu():
+    print("添加学生信息--1")
+    print("查询学生信息--2")
+    print("删除学生信息--3")
+    print("修改学生信息--4")
+    print("展示学生信息--5")
+    print("退出程序--6")
+
+
+def insert(list):
+    s=student()
+    s.num=input("请输入学号：")
+    s.name = input("请输入学生姓名：")
+    s.age= input("请输入学生年龄：")
+    s.grade_chinese = input("请输入语文成绩：")
+    s.grade_math= input("请输入数学成绩：")
+    s.grade_english = input("请输入英语成绩：")
+    list.append(s)
+    return list
+
+def search(list,number):
+    for tmp in list:
+        if tmp.num==number:
+            print_s(tmp)
+            break
+
+def delete(list,number):
+    sum=0
+    for tmp in list:
+        if tmp.num == number:
+            del list[sum]
+            break
+        sum+=1
+    return list
+
+def modify(list,number):
+    sum=0
+    for i in list:
+        if list[sum].num==number:
+            list[sum].num=input("请输入修改后的学号:")
+            list[sum].name=input("请入出修改后的姓名:")
+            list[sum].age=input("请输出修改后的年龄:")
+            list[sum].grade_chinese=input("请输入修改后的语文成绩:")
+            list[sum].grade_math=input("请输入修改后的数学成绩:")
+            list[sum].grade_english=input("请输入修改后的英语成绩:")
+            break
+        sum+=1
+    return list
+
+def show(list):
+    for i in list:
+        print_s(i)
+
+
+if __name__=="__main__":
+    # menu()
+    list_s=list()
+    str=""
+    while True:
+        str=int(input("请输入操作指令："))
+        if str==1:
+            list_s=insert(list_s)
+        elif str==2:
+            if len(list_s) == 0:
+                print("信息库为空,请添加学生信息")
+                continue
+            number=input("请输出要查询学生的学号：")
+            search(list_s,number)
+        elif str==3:
+            if len(list_s) == 0:
+                print("信息库为空,请添加学生信息")
+                continue
+            number2=input("请输出要删除学生的学号：")
+            list_s=delete(list_s,number2)
+        elif str==4:
+            if len(list_s) == 0:
+                print("信息库为空,请添加学生信息")
+                continue
+            number3 = input("请输入要修改学生的学号：")
+            list_s=modify(list_s,number3)
+        elif str==5:
+            if len(list_s) == 0:
+                print("信息库为空,请添加学生信息")
+                continue
+            show(list_s)
+        elif str==6:
+            print("程序运行结束")
+            break;
+        else:
+            print("指令输入错误,请重新输入")
+
+
